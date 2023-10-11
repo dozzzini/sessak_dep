@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import TokenError
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, RefreshToken
 from .serializers import UserSerializer, SignupSerializer
 from .models import User
@@ -81,3 +82,17 @@ class SignUp(APIView):
                 status=status.HTTP_200_OK,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class Logout(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response({"message":"로그아웃에 성공했습니다."}, status=status.HTTP_204_NO_CONTENT)
+        except KeyError:
+                return Response({"error": "refresh token not found in request data."}, status=status.HTTP_400_BAD_REQUEST)
+        except TokenError as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

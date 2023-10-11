@@ -35,4 +35,5 @@ urlpatterns = [
         "refresh/",
         TokenRefreshView.as_view(),
     ),
+    path("logout/",views.Logout.as_view(),)
 ]
