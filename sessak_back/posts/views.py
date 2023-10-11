@@ -27,6 +27,7 @@ from comments.models import Comment
 from .serializers import (
     PostSerializer,
     PopularPostSerializer,
+    PostListSerializer,
 )
 from comments.serializers import CommentSerializer
 
@@ -107,7 +108,7 @@ def all_post(request):
         leftIndex += 1
 
     total_page = list(range(leftIndex, rightIndex + 1))
-    page_list = PostSerializer(page_obj, many=True, context={"request":request}).data
+    page_list = PostListSerializer(page_obj, many=True, context={"request":request}).data
 
     return Response(
         {
