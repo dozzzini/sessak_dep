@@ -2,9 +2,10 @@ version: '3'
 services:
   nginx:
     container_name: sessak-nginx
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./nginx
+    #   dockerfile: Dockerfile
+    image: dozzzini/nginx:1
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./staticfiles:/data/static
@@ -12,9 +13,11 @@ services:
       - "80:80"
   backend:
     container_name: sessak_backend
-    build:
-      context: ./sessak_back
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./sessak_back
+    #   dockerfile: Dockerfile
+    image: dozzzini/back:1
+
     ports:
       - "8000:8000"
     env_file:

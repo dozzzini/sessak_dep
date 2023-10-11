@@ -10,6 +10,7 @@ class PostSerializer(ModelSerializer):
     author = UserSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     post_comments = CommentSerializer(read_only=True, many=True)
+    comment_date = CommentSerializer(read_only=True, many=True)
     like_nums = SerializerMethodField()
     comment_nums = SerializerMethodField()
 
