@@ -22,6 +22,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # 모델 불러오기
 from .models import Post
 from comments.models import Comment
+from categories.models import Category
 
 # serializers 불러오기
 from .serializers import (
@@ -49,8 +50,10 @@ class NewPost(APIView):
                 serializer.errors,
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
-        new_post = serializer.save(author=request.user)
+        category_name = request.data["category"]
+        
+        category = Category.objects.get(name=category_name)
+        new_post = serializer.save(author=request.user, category=category)
         return Response(
             PostSerializer(new_post).data,
             status=status.HTTP_201_CREATED,

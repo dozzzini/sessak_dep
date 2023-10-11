@@ -37,8 +37,8 @@ class Post(models.Model):
     category = models.ForeignKey(
         "categories.Category",
         max_length=10,
-        on_delete=models.SET_NULL,
-        null=True,
+        on_delete=models.CASCADE,
+        null=False,
         verbose_name="카테고리",
     )
 
