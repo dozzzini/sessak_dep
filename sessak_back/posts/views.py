@@ -65,16 +65,21 @@ class NewPost(APIView):
 @api_view(["GET"])
 def all_post(request):
     # 전체 포스트가 담겨 있는 객체들을 생성일 최신순으로 정렬 + 위치 정보
-    try:
-        user = request.user
-        post_list = Post.objects.filter(author__location=user.location).order_by(
-            "-created_at"
-        )
-    except:
-        return Response(
-            {"message": "위치 정보를 확인해주세요."}, status=status.HTTP_401_UNAUTHORIZED
-        )
-
+    if request.query_params.get("category") is not None:
+        category_name = request.query_params.get("category")
+        category = Category.objects.get(name = category_name)
+        post_list = Post.objects.filter(author__location = request.user.location, category = category).order_by("-created_at")
+    else:
+        try:
+            user = request.user
+            post_list = Post.objects.filter(author__location=user.location).order_by(
+                "-created_at"
+            )
+        except:
+            return Response(
+                {"message": "위치 정보를 확인해주세요."}, status=status.HTTP_401_UNAUTHORIZED
+            )
+    
     #'page'라는 명으로 들어온 값을 가져오기
     page = int(request.GET.get("page", 1))
 

@@ -38,6 +38,7 @@ class UserManager(BaseUserManager):
         self,
         email,
         nickname,
+        location,
         name="admin",
         profile_image=None,
         password=None,
@@ -49,6 +50,7 @@ class UserManager(BaseUserManager):
             email=email,
             nickname=nickname,
             password=password,
+            location=location,
             profile_image=profile_image,
             name=name,
         )
