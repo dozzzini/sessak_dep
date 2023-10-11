@@ -27,7 +27,7 @@ class PostSerializer(ModelSerializer):
         return post.post_comments.all().count()
     
     
-class PostListSerializer(ModelSerializer):
+class PostLikeSerializer(ModelSerializer):
     author = UserSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
     post_comments = CommentSerializer(read_only=True, many=True)
