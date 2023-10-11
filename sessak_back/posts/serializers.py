@@ -13,6 +13,7 @@ class PostSerializer(ModelSerializer):
     comment_date = CommentSerializer(read_only=True, many=True)
     like_nums = SerializerMethodField()
     comment_nums = SerializerMethodField()
+    is_like = SerializerMethodField()
 
     # methodfield로 선언한 애들은 무조건 field에 추가해줘야함
     class Meta:
@@ -24,6 +25,11 @@ class PostSerializer(ModelSerializer):
 
     def get_comment_nums(self, post):
         return post.post_comments.all().count()
+    
+    def get_is_like(self,post):
+        request = self.context["request"]
+        return post.like_users.filter(pk=request.user.pk).exists()
+
 
 
 class PopularPostSerializer(ModelSerializer):

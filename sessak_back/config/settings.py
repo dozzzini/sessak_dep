@@ -72,11 +72,13 @@ MIDDLEWARE = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     "https://port-0-sessak-back2-cgw1f2almhig6l2.sel5.cloudtype.app",
+    "http://www.sessak.store"
 ]
 CORS_ALLOWED_ORIGIN = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
     "https://port-0-sessak-back2-cgw1f2almhig6l2.sel5.cloudtype.app",
+    "http://www.sessak.store",
 ]
 CORS_ORIGIN_WHITELIST = (
     "http://127.0.0.1:3000",

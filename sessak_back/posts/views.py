@@ -107,7 +107,7 @@ def all_post(request):
         leftIndex += 1
 
     total_page = list(range(leftIndex, rightIndex + 1))
-    page_list = PostSerializer(page_obj, many=True).data
+    page_list = PostSerializer(page_obj, many=True, context={"request":request}).data
 
     return Response(
         {
