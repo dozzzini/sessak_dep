@@ -71,20 +71,22 @@ MIDDLEWARE = [
     "social_django.middleware.SocialAuthExceptionMiddleware",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://port-0-sessak-back2-cgw1f2almhig6l2.sel5.cloudtype.app",
-    "http://www.sessak.store"
+    "https://www.sessak.store/",
+    "https://www.sessak.store",
+    "https://sessak.store",
 ]
 CORS_ALLOWED_ORIGIN = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
-    "https://port-0-sessak-back2-cgw1f2almhig6l2.sel5.cloudtype.app",
-    "http://www.sessak.store",
+    "https://www.sessak.store/",
+    "https://www.sessak.store",
+    "https://sessak.store",
 ]
-CORS_ORIGIN_WHITELIST = (
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-    "https://port-0-sessak-back2-cgw1f2almhig6l2.sel5.cloudtype.app",
-)
+# CORS_ORIGIN_WHITELIST = (
+#     "http://127.0.0.1:3000",
+#     "http://localhost:3000",
+#     "https://port-0-sessak-back2-cgw1f2almhig6l2.sel5.cloudtype.app",
+# )
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = "config.urls"
@@ -188,7 +190,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.SessionAuthentication",  # 배포할 때 지워야 함
+        # "rest_framework.authentication.SessionAuthentication",  # 배포할 때 지워야 함
     ),
 }
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
@@ -220,21 +222,21 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Database
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# # 배포용
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": get_env_variable("NAME"),
-#         "HOST": get_env_variable("HOST"),
-#         "USER": get_env_variable("USER"),
-#         "PASSWORD": get_env_variable("PASSWORD"),
-#         "PORT": get_env_variable("PORT"),
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+# # 배포용
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": get_env_variable("NAME"),
+        "HOST": get_env_variable("HOST"),
+        "USER": get_env_variable("USER"),
+        "PASSWORD": get_env_variable("PASSWORD"),
+        "PORT": get_env_variable("PORT"),
+    }
+}

@@ -65,10 +65,10 @@ class NewPost(APIView):
 @api_view(["GET"])
 def all_post(request):
     # 전체 포스트가 담겨 있는 객체들을 생성일 최신순으로 정렬 + 위치 정보
-    if request.query_params.get("category") is not None:
+    if request.query_params.get("category"):
         category_name = request.query_params.get("category")
-        category = Category.objects.get(name = category_name)
-        post_list = Post.objects.filter(author__location = request.user.location, category = category).order_by("-created_at")
+        category = Category.objects.get(name=category_name)
+        post_list = Post.objects.filter(author__location=request.user.location, category=category)
     else:
         try:
             user = request.user
